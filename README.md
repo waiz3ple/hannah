@@ -30,4 +30,4 @@ npm run preview  # preview the build
 
 ## Deploy
 
-SPA rewrites are included for Netlify (`public/_redirects`) and Vercel (`vercel.json`).
+Hosted on Namecheap shared hosting (Apache/cPanel). Run `npm run build` and upload the **contents** of `dist/` (including the hidden `.htaccess`) to `public_html`. The `.htaccess` handles HTTPS, www → non-www, SPA routing and caching.
