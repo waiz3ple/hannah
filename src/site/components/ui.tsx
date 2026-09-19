@@ -152,11 +152,8 @@ export function ClosingCta({
             {title}
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-lg text-paper/70">{text}</p>
-          <div className="mt-10 flex flex-wrap justify-center gap-4">
+          <div className="mt-10 flex justify-center">
             <ButtonLink to="/contact">Start a Conversation</ButtonLink>
-            <ButtonLink to="/portfolio" variant="outline-light">
-              View My Work
-            </ButtonLink>
           </div>
         </Reveal>
       </div>
