@@ -9,6 +9,12 @@ const fieldCls =
   "mt-2 w-full border-0 border-b border-ink/25 bg-transparent px-0 py-3 text-base text-ink placeholder:text-stone/60 transition-colors focus:border-bronze focus:ring-0 focus:outline-none";
 const labelCls = "eyebrow text-stone";
 
+/** Today's date as YYYY-MM-DD in the visitor's local time zone. */
+function today() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
+
 export function Contact() {
   usePageMeta(
     "Contact",
@@ -183,7 +189,7 @@ export function Contact() {
                 <label htmlFor="event_date" className={labelCls}>
                   Event date
                 </label>
-                <input id="event_date" name="event_date" type="date" className={fieldCls} />
+                <input id="event_date" name="event_date" type="date" min={today()} className={fieldCls} />
               </div>
               <div className="sm:col-span-2">
                 <label htmlFor="location" className={labelCls}>
