@@ -30,4 +30,4 @@ npm run preview  # preview the build
 
 ## Deploy
 
-Hosted on Namecheap shared hosting (Apache/cPanel). Run `npm run build` and upload the **contents** of `dist/` (including the hidden `.htaccess`) to `public_html`. The `.htaccess` handles HTTPS, www → non-www, SPA routing and caching.
+Hosted on Namecheap shared hosting (Apache/cPanel). **Automatic:** every push to `main` builds and uploads via GitHub Actions (`.github/workflows/deploy.yml`) once the repository secrets `FTP_SERVER`, `FTP_USERNAME` and `FTP_PASSWORD` are set (optional: `FTP_SERVER_DIR`, default `/public_html/`; `VITE_CONTACT_ENDPOINT`). **Manual:** run `npm run build` and upload the **contents** of `dist/` (including the hidden `.htaccess`) to `public_html`. The `.htaccess` handles HTTPS, www → non-www, SPA routing and caching.

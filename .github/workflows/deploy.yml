@@ -1,0 +1,50 @@
+name: Deploy to Namecheap
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      HAS_FTP: ${{ secrets.FTP_SERVER != '' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+        env:
+          # Optional: FormSubmit alias endpoint (hides the email address from the page source).
+          VITE_CONTACT_ENDPOINT: ${{ secrets.VITE_CONTACT_ENDPOINT }}
+
+      - name: Skip upload (FTP secrets not set)
+        if: env.HAS_FTP != 'true'
+        run: echo "::notice::Add FTP_SERVER, FTP_USERNAME and FTP_PASSWORD repository secrets to enable deployment."
+
+      - name: Upload to hosting over FTPS
+        if: env.HAS_FTP == 'true'
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          # Shared-hosting certificates are issued for the server hostname, not your domain.
+          security: loose
+          local-dir: ./dist/
+          # Main cPanel account: /public_html/. An FTP account created with public_html as its root: /
+          server-dir: ${{ secrets.FTP_SERVER_DIR || '/public_html/' }}
