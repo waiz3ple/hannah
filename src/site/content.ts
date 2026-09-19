@@ -26,13 +26,15 @@ export const profile = {
 };
 
 export const contact = {
-  // Shown on the contact page and footer; also used as the form fallback when no endpoint is set.
+  // Shown on the contact page and footer; enquiries from the contact form are delivered here.
   email: "info@hannahoyawoye.com",
   linkedin: "https://www.linkedin.com/in/hannah-esan-oyawoye-59b46b428",
   // TO CONFIRM: preferred professional/social handle.
   instagram: "raddyhan",
-  // Form service endpoint (e.g. Formspree). Set VITE_CONTACT_ENDPOINT in .env.local or your host.
-  formEndpoint: (import.meta.env.VITE_CONTACT_ENDPOINT as string | undefined) ?? "",
+  // Enquiries are delivered to `email` via FormSubmit (formsubmit.co). After activation, set
+  // VITE_CONTACT_ENDPOINT to the FormSubmit alias URL (https://formsubmit.co/ajax/<alias>) to hide the address.
+  formEndpoint:
+    (import.meta.env.VITE_CONTACT_ENDPOINT as string | undefined) || "https://formsubmit.co/ajax/info@hannahoyawoye.com",
   enquiryTypes: [
     "Live Production",
     "Creative Project",

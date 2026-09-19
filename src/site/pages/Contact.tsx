@@ -33,39 +33,36 @@ export function Contact() {
       setStatus("sent");
       return;
     }
-    delete data.company_website;
 
-    if (contact.formEndpoint) {
-      setStatus("sending");
-      try {
-        const res = await fetch(contact.formEndpoint, {
-          method: "POST",
-          headers: { "Content-Type": "application/json", Accept: "application/json" },
-          body: JSON.stringify(data),
-        });
-        if (!res.ok) throw new Error(`Request failed (${res.status})`);
-        form.reset();
-        setStatus("sent");
-      } catch {
-        setError("Your message couldn't be sent just now. Please try again in a moment.");
-        setStatus("error");
-      }
-      return;
-    }
+    const payload = {
+      "Full name": data.full_name,
+      Email: data.email,
+      Organisation: data.organisation || "—",
+      "Project / event": data.project || "—",
+      "Enquiry type": data.enquiry_type,
+      "Event date": data.event_date || "—",
+      Location: data.location || "—",
+      Message: data.message,
+      _subject: `New enquiry: ${data.enquiry_type} — ${data.project || data.full_name}`,
+      _replyto: data.email,
+      _template: "table",
+    };
 
-    if (contact.email) {
-      const body = Object.entries(data)
-        .filter(([, v]) => v)
-        .map(([k, v]) => `${k.replace(/_/g, " ")}: ${v}`)
-        .join("\n");
-      const subject = `${data.enquiry_type || "Enquiry"} — ${data.project || data.full_name}`;
-      window.location.href = `mailto:${contact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    setStatus("sending");
+    try {
+      const res = await fetch(contact.formEndpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok || String(json.success) === "false") throw new Error(json.message ?? `HTTP ${res.status}`);
+      form.reset();
       setStatus("sent");
-      return;
+    } catch {
+      setError(`Your message couldn't be sent just now. Please try again, or email ${contact.email} directly.`);
+      setStatus("error");
     }
-
-    setError("The enquiry form is being set up. Please reach out via the links on this page in the meantime.");
-    setStatus("error");
   }
 
   return (

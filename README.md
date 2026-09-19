@@ -24,7 +24,7 @@ npm run preview  # preview the build
 
 - Add photography: import images into a project's `image` / `gallery` fields, and add items to `media`.
 - Confirm `contact.instagram` and set `profile.profileUrl` (PDF) in `content.ts`.
-- Contact form: set `VITE_CONTACT_ENDPOINT` (e.g. a Formspree form URL) in `.env.local` / hosting env. Without it, the form falls back to a `mailto:` to `contact.email`.
+- Contact form: enquiries go to info@hannahoyawoye.com via [FormSubmit](https://formsubmit.co). The **first** submission sends an activation email to that inbox — click the link once to start receiving enquiries. Optionally, set `VITE_CONTACT_ENDPOINT` to the FormSubmit alias URL afterwards to hide the address from the page source.
 - Confirm items marked `TO CONFIRM` in `content.ts` (roles, dates, venues, figures).
 - Add testimonials once permissions are in place.
 
