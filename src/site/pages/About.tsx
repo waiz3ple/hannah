@@ -1,4 +1,4 @@
-import { certifications, education, journey, philosophy, profile } from "../content";
+import { certifications, education, journey, profile } from "../content";
 import { ButtonLink, ClosingCta, PageHero, Reveal, SectionHeading, usePageMeta } from "../components/ui";
 
 const bio = [
@@ -117,22 +117,6 @@ export function About() {
               </Reveal>
             ))}
           </ul>
-        </div>
-      </section>
-
-      <section className="border-t border-ink/10 bg-paper">
-        <div className="container-site py-20 md:py-24">
-          <Reveal>
-            <p className="eyebrow text-bronze-deep">Working philosophy</p>
-            <p className="mt-6 flex flex-wrap items-baseline gap-x-5 gap-y-2 font-display text-4xl font-light md:text-6xl">
-              {philosophy.map((p, i) => (
-                <span key={p.word} className="flex items-baseline gap-5">
-                  <span className={i % 2 ? "italic text-bronze-deep" : ""}>{p.word}</span>
-                  {i < philosophy.length - 1 && <span className="text-2xl text-ink/25">/</span>}
-                </span>
-              ))}
-            </p>
-          </Reveal>
         </div>
       </section>
 
