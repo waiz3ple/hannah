@@ -42,6 +42,7 @@ import aaaHonourees from "../assets/african-achievers-awards-2026/web/honourees-
 import aaaStage from "../assets/african-achievers-awards-2026/web/stage-screen.jpg";
 import aaaGuest from "../assets/african-achievers-awards-2026/web/hannah-with-guest.jpg";
 import aaaTeam from "../assets/african-achievers-awards-2026/web/event-production-team.jpg";
+import victoryRig from "../assets/victory-sounds-2024/web/wembley-rig-walkthrough.jpg";
 import victoryLineUp from "../assets/flyers/web/victory-sounds-line-up.jpg";
 import victoryGuests from "../assets/victory-sounds-2024/web/sinach-celebration-guests.jpg";
 import victoryTeam from "../assets/victory-sounds-2024/web/sinach-celebration-team.jpg";
@@ -292,6 +293,8 @@ export type Project = {
   /** Accent used by the placeholder artwork until photography is supplied. */
   tone: "bronze" | "ember" | "gold" | "violet" | "teal";
   image?: string;
+  /** CSS object-position for `image`, e.g. "50% 0%" to keep the top of a tall flyer in frame. */
+  imagePosition?: string;
   gallery?: string[];
 };
 
@@ -333,7 +336,9 @@ export const projects: Project[] = [
     outcome:
       "The concert was delivered live at OVO Arena Wembley, with production, venue and front-of-house teams working to one coordinated plan.",
     tone: "violet",
-    gallery: [victoryLineUp, victoryGuests, victoryTeam],
+    image: victoryLineUp,
+    imagePosition: "50% 0%",
+    gallery: [victoryRig, victoryGuests, victoryTeam],
   },
   {
     slug: "upper-room-uk",

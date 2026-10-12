@@ -27,6 +27,7 @@ export function ProjectArt({
         src={project.image}
         alt={`${project.title} at ${project.venue}`}
         loading="lazy"
+        style={project.imagePosition ? { objectPosition: project.imagePosition } : undefined}
         className={`h-full w-full object-cover ${className}`}
       />
     );
