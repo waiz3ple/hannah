@@ -1,5 +1,6 @@
 import { certifications, education, journey, profile } from "../content";
 import { ButtonLink, ClosingCta, PageHero, Reveal, SectionHeading, usePageMeta } from "../components/ui";
+import { PortraitCarousel } from "../components/PortraitCarousel";
 
 const bio = [
   "I am a Live Production Manager, Creative Project Manager and Event Curator with experience supporting and leading complex live programmes across the UK. My work sits at the intersection of production, operations, people and project delivery. I enjoy taking ambitious ideas and helping build the systems required to bring them to life.",
@@ -26,14 +27,8 @@ export function About() {
         <Reveal className="lg:sticky lg:top-32 lg:self-start">
           <figure className="relative">
             <div aria-hidden className="absolute -right-3 -bottom-3 h-full w-full border border-bronze/60" />
-            <img
-              src={profile.portrait}
-              alt={`Portrait of ${profile.name}`}
-              width={1600}
-              height={1600}
-              className="relative aspect-[4/5] w-full bg-sand object-cover object-[50%_30%]"
-            />
-            <figcaption className="relative mt-7 flex items-center gap-3 text-sm text-stone">
+            <PortraitCarousel slides={profile.gallery} label={`Photographs of ${profile.name}`} className="relative" />
+            <figcaption className="relative mt-5 flex items-center gap-3 text-sm text-stone">
               <span className="h-px w-8 bg-bronze" />
               {profile.name}
             </figcaption>

@@ -25,3 +25,9 @@ dist-ssr
 
 # Upload bundle for cPanel
 hannahoyawoye-site.zip
+
+# Raw photography and video dropped into src/assets/<event>/ — only the web-sized
+# copies in each folder's web/ directory are committed and used by the site.
+src/assets/*/*
+!src/assets/*/web/
+!src/assets/*/web/**

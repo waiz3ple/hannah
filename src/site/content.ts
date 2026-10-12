@@ -5,11 +5,62 @@
  *   TO CONFIRM — direction agreed, factual detail to be checked before launch
  *   TO PROVIDE — asset / figure / link still required
  *
- * To add a photo to a project, drop the file in `src/site/assets/` and import it
- * into the `image` field — the placeholder artwork is replaced automatically.
+ * Photography lives in `src/assets/<event>/`. Only the web-sized copies in each
+ * folder's `web/` directory are committed and imported here; the originals beside
+ * them are git-ignored. Import a `web/` file into a project's `image` field and the
+ * placeholder artwork is replaced automatically.
  */
 
-import portrait from "../assets/hannah-portrait_400x400.jpg";
+import portrait from "../assets/portraits/web/hannah-portrait.jpg";
+import portraitFormal from "../assets/portraits/web/hannah-in-suit.jpg";
+import portraitFlightCases from "../assets/portraits/web/hannah-backstage-flight-cases.jpg";
+import portraitSmiling from "../assets/portraits/web/hannah-smiling.jpg";
+import portraitLaughing from "../assets/portraits/web/hannah-laughing.jpg";
+import portraitPlatform from "../assets/portraits/web/hannah-platform.jpg";
+import portraitLounge from "../assets/portraits/web/hannah-lounge.jpg";
+import portraitGreaterPower from "../assets/portraits/web/hannah-backstage-greater-power.jpg";
+
+// Web-sized copies (max 1800px) live in each folder's `web/` directory; the originals beside them are git-ignored.
+import upperRoomHero from "../assets/upper-room-uk-2026/web/stage-lighting-wembley.jpg";
+import upperRoomBeforeDoors from "../assets/upper-room-uk-2026/web/wembley-before-doors.jpg";
+import upperRoomVolunteers from "../assets/upper-room-uk-2026/web/volunteer-team.jpg";
+import upperRoomCrowd from "../assets/upper-room-uk-2026/web/arena-crowd.jpg";
+import upperRoomArtist from "../assets/upper-room-uk-2026/web/artist-on-stage.jpg";
+import upperRoomFloor from "../assets/upper-room-uk-2026/web/audience-floor.jpg";
+import upperRoomWide from "../assets/upper-room-uk-2026/web/arena-wide.jpg";
+import gloryHero from "../assets/glory-conference-2026/web/stage-beams-newcastle.jpg";
+import gloryWristbands from "../assets/glory-conference-2026/web/wristband-access.jpg";
+import gloryVolunteers from "../assets/glory-conference-2026/web/volunteer-team.jpg";
+import gloryPhoneLights from "../assets/glory-conference-2026/web/crowd-phone-lights.jpg";
+import gloryWorship from "../assets/glory-conference-2026/web/worship-on-stage.jpg";
+import gloryBackstage from "../assets/glory-conference-2026/web/hannah-backstage.jpg";
+import gloryFloor from "../assets/glory-conference-2026/web/arena-floor.jpg";
+import aaaHero from "../assets/african-achievers-awards-2026/web/hannah-production-desk.jpg";
+import aaaShowControl from "../assets/african-achievers-awards-2026/web/hannah-show-control.jpg";
+import aaaVenue from "../assets/african-achievers-awards-2026/web/venue-set.jpg";
+import aaaHonourees from "../assets/african-achievers-awards-2026/web/honourees-on-stage.jpg";
+import aaaStage from "../assets/african-achievers-awards-2026/web/stage-screen.jpg";
+import aaaGuest from "../assets/african-achievers-awards-2026/web/hannah-with-guest.jpg";
+import aaaTeam from "../assets/african-achievers-awards-2026/web/event-production-team.jpg";
+import victoryLineUp from "../assets/flyers/web/victory-sounds-line-up.jpg";
+import victoryGuests from "../assets/victory-sounds-2024/web/sinach-celebration-guests.jpg";
+import victoryTeam from "../assets/victory-sounds-2024/web/sinach-celebration-team.jpg";
+import outpouringAudience from "../assets/the-outpouring-2025/web/arena-audience.jpg";
+import outpouringPreShow from "../assets/the-outpouring-2025/web/stage-pre-show.jpg";
+import outpouringMono from "../assets/the-outpouring-2025/web/stage-black-and-white.jpg";
+import outpouringLeader from "../assets/the-outpouring-2025/web/worship-leader.jpg";
+import outpouringStage from "../assets/the-outpouring-2025/web/stage-wide.jpg";
+import carnivalStage from "../assets/african-roots-carnival-2026/web/stage-build.jpg";
+import carnivalFloor from "../assets/african-roots-carnival-2026/web/show-floor.jpg";
+import carnivalTeam from "../assets/african-roots-carnival-2026/web/team-flyer.jpg";
+import tarryOnStage from "../assets/tarry-uk/web/hannah-on-stage.jpg";
+import tarryDoor from "../assets/tarry-uk/web/hannah-at-the-door.jpg";
+import tarryCongregation from "../assets/tarry-uk/web/congregation.jpg";
+import tarryAudience from "../assets/tarry-uk/web/audience.jpg";
+import ymrWorship from "../assets/ymr-uk-2024/web/worship.jpg";
+import ymrHands from "../assets/ymr-uk-2024/web/hands-raised.jpg";
+import ymrJoy from "../assets/ymr-uk-2024/web/audience-joy.jpg";
+import hannahBackstage from "../assets/portraits/web/hannah-backstage-greater-power.jpg";
 
 export const profile = {
   name: "Hannah Esan Oyawoye",
@@ -20,7 +71,29 @@ export const profile = {
   heroStatement:
     "I manage the people, systems, logistics and creative processes behind live experiences. From pre-production planning to on-site delivery, I work across production, operations, teams and audience experience to turn ambitious ideas into organised and memorable events.",
   location: "UK-based", // TO CONFIRM wording
+  /** Shown on the home page. */
   portrait,
+  /** Formal headshot; first slide of the About page carousel. */
+  portraitFormal,
+  /** Photographs rotated through the About page carousel, in order. */
+  gallery: [
+    { src: portraitFormal, alt: "Hannah Esan Oyawoye in a tailored blazer", caption: "Hannah Esan Oyawoye" },
+    {
+      src: portraitFlightCases,
+      alt: "Hannah backstage beside flight cases and stacked chairs before a show",
+      caption: "Backstage, before doors",
+    },
+    {
+      src: portraitGreaterPower,
+      alt: "Hannah backstage at Greater Power Conference wearing the event t-shirt",
+      caption: "Greater Power Conference, London",
+    },
+    { src: portrait, alt: "Portrait of Hannah Esan Oyawoye", caption: "Portrait" },
+    { src: portraitLaughing, alt: "Hannah laughing in sunglasses against a brick wall", caption: "Off the clock" },
+    { src: portraitPlatform, alt: "Hannah with arms outstretched on a railway platform", caption: "Between venues" },
+    { src: portraitSmiling, alt: "Hannah smiling in a patterned shirt", caption: "Hello" },
+    { src: portraitLounge, alt: "Hannah seated in a hotel lounge", caption: "A quiet moment on tour" },
+  ],
   // TO PROVIDE: stable URL to the downloadable profile / CV PDF. The "Download Profile" button appears once set.
   profileUrl: "",
 };
@@ -260,6 +333,7 @@ export const projects: Project[] = [
     outcome:
       "The concert was delivered live at OVO Arena Wembley, with production, venue and front-of-house teams working to one coordinated plan.",
     tone: "violet",
+    gallery: [victoryLineUp, victoryGuests, victoryTeam],
   },
   {
     slug: "upper-room-uk",
@@ -297,13 +371,16 @@ export const projects: Project[] = [
     outcome:
       "Registration, access and hospitality operated as one joined-up system across the arena, giving the programme team room to focus on the live experience.",
     tone: "gold",
+    image: upperRoomHero,
+    gallery: [upperRoomBeforeDoors, upperRoomVolunteers, upperRoomCrowd, upperRoomArtist, upperRoomFloor, upperRoomWide],
   },
   {
     slug: "african-achievers-awards",
     title: "African Achievers Awards",
-    venue: "London", // TO CONFIRM edition, date and venue
+    subtitle: "16th edition",
+    venue: "London", // TO CONFIRM venue name
     city: "London",
-    date: "",
+    date: "July 2026", // TO CONFIRM exact date (photographs are dated 22 July 2026)
     role: "Project Leader / Production Manager", // TO CONFIRM
     disciplines: ["Awards production", "Programme planning", "Guest experience", "Production scheduling"],
     summary:
@@ -333,13 +410,15 @@ export const projects: Project[] = [
     outcome:
       "An awards programme delivered as a coordinated production, with the honouree and guest experience treated as part of the show.",
     tone: "bronze",
+    image: aaaHero,
+    gallery: [aaaHonourees, aaaShowControl, aaaStage, aaaVenue, aaaGuest, aaaTeam],
   },
   {
     slug: "the-glory-conference",
     title: "The Glory Conference",
-    venue: "Newcastle Arena", // TO CONFIRM official title, date and venue name
+    venue: "Utilita Arena Newcastle",
     city: "Newcastle",
-    date: "",
+    date: "3 April 2026",
     role: "Project Manager — Registration, Access & Volunteers",
     disciplines: ["Arena operations", "Access control", "Volunteer management", "Stakeholder coordination"],
     summary:
@@ -347,8 +426,8 @@ export const projects: Project[] = [
     overview:
       "The Glory Conference took place in an arena setting in Newcastle. As Project Manager for registration, access and volunteers, Hannah was responsible for the systems that got people in, got them to the right place, and kept the operation running throughout.",
     scale: [
-      { label: "Venue", value: "Newcastle Arena" },
-      { label: "Format", value: "Arena conference" },
+      { label: "Venue", value: "Utilita Arena Newcastle" },
+      { label: "Date", value: "3 April 2026" },
       { label: "Role", value: "Project Manager" },
       { label: "Focus", value: "Registration, access & volunteers" },
     ],
@@ -369,14 +448,16 @@ export const projects: Project[] = [
     outcome:
       "A structured registration, access and volunteer operation that supported smooth arena delivery.",
     tone: "ember",
+    image: gloryHero,
+    gallery: [gloryFloor, gloryWristbands, gloryVolunteers, gloryWorship, gloryBackstage, gloryPhoneLights],
   },
   {
     slug: "hour-of-revival-manchester",
     title: "Hour of Revival",
     subtitle: "Manchester",
-    venue: "Manchester",
+    venue: "The Sheridan, Miles Platting",
     city: "Manchester",
-    date: "August 2026",
+    date: "26–27 August 2026",
     role: "Operations & Volunteer Coordination", // TO CONFIRM role title
     disciplines: ["Volunteer coordination", "Attendee communications", "Logistics", "Post-event reporting"],
     summary:
@@ -384,8 +465,8 @@ export const projects: Project[] = [
     overview:
       "Hour of Revival Manchester welcomed attendees and international delegates. Hannah supported operations end to end: volunteers, communications, logistics and registration before the event, and structured reporting after it.",
     scale: [
-      { label: "City", value: "Manchester" },
-      { label: "Date", value: "August 2026" },
+      { label: "Venue", value: "The Sheridan, Manchester" },
+      { label: "Date", value: "26–27 August 2026" },
       { label: "Audience", value: "Including international delegates" },
       { label: "Focus", value: "Operations & volunteers" },
     ],
@@ -485,7 +566,173 @@ export const articles: Article[] = [
  * team briefings, stage environments and live audience moments.
  * TO PROVIDE: add entries as { src, alt, caption, project? } once images and permissions are confirmed.
  */
-export const media: { src: string; alt: string; caption: string; project?: string }[] = [];
+export const media: { src: string; alt: string; caption: string; project?: string }[] = [
+  {
+    src: outpouringAudience,
+    alt: "Arena audience facing the stage at The Outpouring UK",
+    caption: "Arena audience during the programme",
+    project: "The Outpouring UK · P&J Live, Aberdeen · January 2025",
+  },
+  {
+    src: outpouringPreShow,
+    alt: "Lit stage before doors at The Outpouring UK",
+    caption: "Stage set and lit before doors",
+    project: "The Outpouring UK · Aberdeen · January 2025",
+  },
+  {
+    src: tarryOnStage,
+    alt: "Hannah Esan Oyawoye speaking on stage at Tarry London",
+    caption: "On stage during the programme",
+    project: "Tarry London",
+  },
+  {
+    src: carnivalStage,
+    alt: "Stage and LED screen being built for African Roots Carnival",
+    caption: "Stage build ahead of doors",
+    project: "African Roots Carnival · G-Mill, Sheffield · 29 August 2026",
+  },
+  {
+    src: ymrHands,
+    alt: "Hands raised in the audience at YMR UK 2024",
+    caption: "Audience in worship",
+    project: "YMR UK 2024 · Jubilee Church, Manchester · May 2024",
+  },
+  {
+    src: outpouringMono,
+    alt: "Black and white photograph of performers on stage at The Outpouring UK",
+    caption: "From the stage, looking out",
+    project: "The Outpouring UK · Aberdeen · January 2025",
+  },
+  {
+    src: tarryDoor,
+    alt: "Hannah Esan Oyawoye at the venue entrance at Tarry",
+    caption: "Front of house on event day",
+    project: "Tarry UK",
+  },
+  {
+    src: carnivalFloor,
+    alt: "Audience watching the stage at African Roots Carnival",
+    caption: "Show floor during the live programme",
+    project: "African Roots Carnival · Sheffield · 29 August 2026",
+  },
+  {
+    src: hannahBackstage,
+    alt: "Hannah Esan Oyawoye backstage beside flight cases at Greater Power Conference",
+    caption: "Backstage before the show",
+    project: "Greater Power Conference · London · May 2024",
+  },
+  {
+    src: outpouringLeader,
+    alt: "Worship leader on stage at The Outpouring UK",
+    caption: "Live on stage",
+    project: "The Outpouring UK · Aberdeen · January 2025",
+  },
+  {
+    src: ymrWorship,
+    alt: "Attendee singing in the crowd at YMR UK 2024",
+    caption: "In the room",
+    project: "YMR UK 2024 · Manchester · May 2024",
+  },
+  {
+    src: tarryCongregation,
+    alt: "Congregation gathered at Tarry UK",
+    caption: "A full room at Tarry",
+    project: "Tarry UK",
+  },
+  {
+    src: carnivalTeam,
+    alt: "African Roots Carnival 2026 team announcement naming Hannah Esan Oyawoye as Programme and Stage Manager",
+    caption: "Programme & Stage Manager — team announcement",
+    project: "African Roots Carnival · Sheffield · 29 August 2026",
+  },
+  {
+    src: outpouringStage,
+    alt: "Wide view of the stage at The Outpouring UK",
+    caption: "Stage wide",
+    project: "The Outpouring UK · Aberdeen · January 2025",
+  },
+  {
+    src: ymrJoy,
+    alt: "Attendees smiling and dancing at YMR UK 2024",
+    caption: "Moments audiences remember",
+    project: "YMR UK 2024 · Manchester · May 2024",
+  },
+  {
+    src: tarryAudience,
+    alt: "Attendees listening at Tarry London",
+    caption: "Audience during the session",
+    project: "Tarry London",
+  },
+];
 
 /** TO PROVIDE: at least three testimonials, with permission for quote, name, title and organisation. */
 export const testimonials: { quote: string; name: string; title: string; organisation: string }[] = [];
+
+export type SocialPost = {
+  /** Public Instagram permalink (post or reel). */
+  url: string;
+  /** Short description shown beneath the embed. */
+  caption: string;
+  /** Slug of the project this post belongs to, if any. */
+  project?: Project["slug"];
+};
+
+/**
+ * Instagram posts and reels embedded on the portfolio, case studies and media page.
+ * Order matters: the first post listed for a project is used on the portfolio listing.
+ */
+export const instagramPosts: SocialPost[] = [
+  {
+    url: "https://www.instagram.com/reel/C6HwvmYt8ta/",
+    caption: "Sinach Live in London — OVO Arena Wembley, 6 July 2024",
+    project: "victory-sounds-sinach-live",
+  },
+  {
+    url: "https://www.instagram.com/reel/DZ0qBiClXXw/",
+    caption: "Upper Room UK — OVO Arena Wembley, 20 June 2026",
+    project: "upper-room-uk",
+  },
+  {
+    // TO CONFIRM: this is the organiser's Upper Room Calgary save-the-date, not the UK edition.
+    url: "https://www.instagram.com/p/DVJ7apDgiur/",
+    caption: "Upper Room Calgary — save the date, 12 April 2026",
+    project: "upper-room-uk",
+  },
+  {
+    url: "https://www.instagram.com/reel/DVskmTsDJoQ/",
+    caption: "The Glory Conference outreach rallies across the UK, March 2026",
+    project: "the-glory-conference",
+  },
+  {
+    url: "https://www.instagram.com/p/DIlQ-TctDvn/",
+    caption: "The Glory Conference 2025 — A Night of Glory Encounter, 18 April 2025",
+    project: "the-glory-conference",
+  },
+  {
+    url: "https://www.instagram.com/p/C3QlTGoMe9D/",
+    caption: "The Glory Conference 2024 — OVO Arena Wembley, 11–12 April 2024",
+    project: "the-glory-conference",
+  },
+  {
+    url: "https://www.instagram.com/reel/Cvzj4nBIeDa/",
+    caption: "The Glory Conference 2023 — First Direct Arena, Leeds, 17–18 August 2023",
+    project: "the-glory-conference",
+  },
+  {
+    url: "https://www.instagram.com/reel/DcjGFoDIMQy/",
+    caption: "Hour of Revival Manchester — inside the programme, 27 August 2026",
+    project: "hour-of-revival-manchester",
+  },
+  {
+    url: "https://www.instagram.com/p/DcAQp4TIgwt/",
+    caption: "Hour of Revival Manchester — The Sheridan, Miles Platting, 26–27 August 2026",
+    project: "hour-of-revival-manchester",
+  },
+  {
+    url: "https://www.instagram.com/p/DctQWASNeA7/",
+    caption: "Audiovisual and media production partner's recap of Hour of Revival Manchester",
+    project: "hour-of-revival-manchester",
+  },
+];
+
+export const postsForProject = (slug: string) => instagramPosts.filter((post) => post.project === slug);

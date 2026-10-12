@@ -1,10 +1,11 @@
 import { Link } from "react-router";
-import { media, projects } from "../content";
+import { instagramPosts, media, projects } from "../content";
 import { ClosingCta, PageHero, Reveal, SectionHeading, usePageMeta } from "../components/ui";
-import { ProjectArt } from "../components/ProjectArt";
+import { InstagramEmbed } from "../components/InstagramEmbed";
 
 export function Media() {
   usePageMeta("Media", "Backstage, production and live moments from programmes delivered by Hannah Esan Oyawoye.");
+  const projectFor = (slug?: string) => projects.find((p) => p.slug === slug);
   return (
     <>
       <PageHero
@@ -14,12 +15,49 @@ export function Media() {
             Backstage, build and <em className="text-bronze-light">live moments.</em>
           </>
         }
-        intro="Working photographs from rehearsals, venue set-up, production floors, team briefings and the moments audiences remember."
+        intro="Posts, reels and photographs from the programmes — rehearsals, venue set-up, production floors, team briefings and the moments audiences remember."
       />
 
-      {media.length > 0 ? (
+      {instagramPosts.length > 0 && (
         <section className="container-site py-20 md:py-28">
-          <ul className="columns-1 gap-4 sm:columns-2 lg:columns-3">
+          <SectionHeading
+            eyebrow="On Instagram"
+            title="From the programmes"
+            intro="Posts and reels shared by the artists and organisers of productions Hannah has worked on."
+          />
+          <ul className="mt-14 columns-1 gap-6 sm:columns-2 lg:columns-3">
+            {instagramPosts.map((post) => {
+              const project = projectFor(post.project);
+              return (
+                <Reveal as="li" key={post.url} className="mb-6 break-inside-avoid">
+                  <figure>
+                    <InstagramEmbed url={post.url} />
+                    <figcaption className="mt-3 text-sm text-stone">
+                      {post.caption}
+                      {project && (
+                        <>
+                          {" · "}
+                          <Link
+                            to={`/portfolio/${project.slug}`}
+                            className="text-bronze-deep underline-offset-4 transition-colors hover:text-ink hover:underline"
+                          >
+                            {project.title}
+                          </Link>
+                        </>
+                      )}
+                    </figcaption>
+                  </figure>
+                </Reveal>
+              );
+            })}
+          </ul>
+        </section>
+      )}
+
+      {media.length > 0 && (
+        <section className="container-site pb-20 md:pb-28">
+          <SectionHeading eyebrow="Photography" title="Production photographs" />
+          <ul className="mt-14 columns-1 gap-4 sm:columns-2 lg:columns-3">
             {media.map((item) => (
               <Reveal as="li" key={item.src} className="mb-4 break-inside-avoid">
                 <figure>
@@ -29,26 +67,6 @@ export function Media() {
                     {item.project && <span className="text-bronze-deep"> · {item.project}</span>}
                   </figcaption>
                 </figure>
-              </Reveal>
-            ))}
-          </ul>
-        </section>
-      ) : (
-        <section className="container-site py-20 md:py-28">
-          <SectionHeading
-            eyebrow="Programme archive"
-            title="Explore by production"
-            intro="Production photography from these programmes is being curated. In the meantime, explore each project's case study."
-          />
-          <ul className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {projects.map((project, i) => (
-              <Reveal as="li" key={project.slug} delay={(i % 3) * 0.08}>
-                <Link to={`/portfolio/${project.slug}`} className="group block aspect-[4/5] overflow-hidden">
-                  <div className="h-full transition-transform duration-700 ease-stage group-hover:scale-[1.03]">
-                    <ProjectArt project={project} />
-                  </div>
-                  <span className="sr-only">{project.title} case study</span>
-                </Link>
               </Reveal>
             ))}
           </ul>

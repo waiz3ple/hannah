@@ -1,9 +1,10 @@
 import type { ReactNode } from "react";
 import { Link, useParams } from "react-router";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
-import { projects } from "../content";
+import { postsForProject, projects } from "../content";
 import { ClosingCta, PageHero, Reveal, usePageMeta } from "../components/ui";
 import { ProjectArt } from "../components/ProjectArt";
+import { InstagramEmbed } from "../components/InstagramEmbed";
 import { NotFound } from "./NotFound";
 
 export function Portfolio() {
@@ -22,49 +23,59 @@ export function Portfolio() {
 
       <section className="container-site py-20 md:py-28">
         <ul className="space-y-20 md:space-y-28">
-          {projects.map((project, i) => (
-            <Reveal as="li" key={project.slug}>
-              <Link
-                to={`/portfolio/${project.slug}`}
-                className="group grid items-center gap-8 md:grid-cols-2 md:gap-14"
-              >
-                <div className={`aspect-[4/3] overflow-hidden ${i % 2 ? "md:order-2" : ""}`}>
-                  <div className="h-full transition-transform duration-700 ease-stage group-hover:scale-[1.03]">
-                    <ProjectArt project={project} />
-                  </div>
-                </div>
-                <div>
-                  <p className="font-mono text-xs text-bronze-deep">
-                    {String(i + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
-                  </p>
-                  <h2 className="mt-4 font-display text-4xl leading-tight font-light md:text-5xl">
-                    {project.title}
-                    {project.subtitle && (
-                      <span className="block text-2xl text-stone italic md:text-3xl">{project.subtitle}</span>
+          {projects.map((project, i) => {
+            const feature = postsForProject(project.slug)[0];
+            return (
+              <Reveal as="li" key={project.slug}>
+                <div className="grid items-center gap-8 md:grid-cols-2 md:gap-14">
+                  <div className={i % 2 ? "md:order-2" : ""}>
+                    {feature ? (
+                      <figure className="mx-auto max-w-[540px]">
+                        <InstagramEmbed url={feature.url} />
+                        <figcaption className="mt-3 text-sm text-stone">{feature.caption}</figcaption>
+                      </figure>
+                    ) : (
+                      <Link to={`/portfolio/${project.slug}`} className="group block aspect-[4/3] overflow-hidden">
+                        <div className="h-full transition-transform duration-700 ease-stage group-hover:scale-[1.03]">
+                          <ProjectArt project={project} />
+                        </div>
+                        <span className="sr-only">{project.title} case study</span>
+                      </Link>
                     )}
-                  </h2>
-                  <p className="mt-4 text-sm font-semibold">{project.role}</p>
-                  <p className="mt-1 text-sm text-stone">
-                    {[project.venue !== project.city ? `${project.venue}, ${project.city}` : project.city, project.date]
-                      .filter(Boolean)
-                      .join(" · ")}
-                  </p>
-                  <p className="mt-5 max-w-lg leading-relaxed text-ink/75">{project.summary}</p>
-                  <ul className="mt-6 flex flex-wrap gap-2">
-                    {project.disciplines.map((d) => (
-                      <li key={d} className="border border-ink/15 px-3 py-1 text-xs text-stone">
-                        {d}
-                      </li>
-                    ))}
-                  </ul>
-                  <span className="mt-8 inline-flex items-center gap-2 text-sm font-semibold">
-                    Read case study
-                    <ArrowUpRight className="size-4 text-bronze-deep transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </span>
+                  </div>
+                  <Link to={`/portfolio/${project.slug}`} className="group block">
+                    <p className="font-mono text-xs text-bronze-deep">
+                      {String(i + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
+                    </p>
+                    <h2 className="mt-4 font-display text-4xl leading-tight font-light md:text-5xl">
+                      {project.title}
+                      {project.subtitle && (
+                        <span className="block text-2xl text-stone italic md:text-3xl">{project.subtitle}</span>
+                      )}
+                    </h2>
+                    <p className="mt-4 text-sm font-semibold">{project.role}</p>
+                    <p className="mt-1 text-sm text-stone">
+                      {[project.venue !== project.city ? `${project.venue}, ${project.city}` : project.city, project.date]
+                        .filter(Boolean)
+                        .join(" · ")}
+                    </p>
+                    <p className="mt-5 max-w-lg leading-relaxed text-ink/75">{project.summary}</p>
+                    <ul className="mt-6 flex flex-wrap gap-2">
+                      {project.disciplines.map((d) => (
+                        <li key={d} className="border border-ink/15 px-3 py-1 text-xs text-stone">
+                          {d}
+                        </li>
+                      ))}
+                    </ul>
+                    <span className="mt-8 inline-flex items-center gap-2 text-sm font-semibold">
+                      Read case study
+                      <ArrowUpRight className="size-4 text-bronze-deep transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </span>
+                  </Link>
                 </div>
-              </Link>
-            </Reveal>
-          ))}
+              </Reveal>
+            );
+          })}
         </ul>
       </section>
 
@@ -83,6 +94,9 @@ export function CaseStudy() {
 
   const prev = projects[(index - 1 + projects.length) % projects.length];
   const next = projects[(index + 1) % projects.length];
+  const posts = postsForProject(project.slug);
+  const sections = ["Overview", "Role", "Responsibilities", "Challenge", "Approach", "Outcome"];
+  if (posts.length > 0) sections.push("Watch");
 
   return (
     <>
@@ -131,7 +145,7 @@ export function CaseStudy() {
         <div className="grid gap-16 lg:grid-cols-[14rem_1fr] lg:gap-24">
           <nav aria-label="Case study sections" className="hidden lg:block">
             <ol className="sticky top-32 space-y-3 text-sm text-stone">
-              {["Overview", "Role", "Responsibilities", "Challenge", "Approach", "Outcome"].map((s, i) => (
+              {sections.map((s, i) => (
                 <li key={s}>
                   <a href={`#${s.toLowerCase()}`} className="flex gap-3 transition-colors hover:text-ink">
                     <span className="font-mono text-xs text-bronze-deep">{String(i + 1).padStart(2, "0")}</span>
@@ -191,6 +205,24 @@ export function CaseStudy() {
                 <p className="font-display text-2xl leading-snug font-light md:text-3xl">{project.outcome}</p>
               </div>
             </CaseSection>
+
+            {posts.length > 0 && (
+              <CaseSection id="watch" label="Watch">
+                <p className="max-w-xl text-lg leading-relaxed text-stone">
+                  Posts and reels from the programme, shared by the artists and organisers on Instagram.
+                </p>
+                <ul className={`mt-8 grid gap-8 ${posts.length > 1 ? "sm:grid-cols-2" : ""}`}>
+                  {posts.map((post) => (
+                    <li key={post.url}>
+                      <figure>
+                        <InstagramEmbed url={post.url} />
+                        <figcaption className="mt-3 text-sm text-stone">{post.caption}</figcaption>
+                      </figure>
+                    </li>
+                  ))}
+                </ul>
+              </CaseSection>
+            )}
 
             {project.gallery && project.gallery.length > 0 && (
               <CaseSection id="gallery" label="Gallery">
@@ -261,4 +293,3 @@ function SectionLabel({ children }: { children: ReactNode }) {
     </h2>
   );
 }
-
